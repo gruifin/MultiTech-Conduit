@@ -8,7 +8,7 @@ This tutorial will focus on Configuring the Multitech Conduit Gateway:
 
 ##The Hardware
 
-| Multitech Conduit | MTAC-LORA |
+| MultiTech Conduit | MTAC-LORA |
 | -------------- | -------------- |
 | <img style='max-width: 350px;' src="images/multitech-conduit.png"> | <img style='max-width: 200px;' src="images/lora-mcard.png"> |
 | [info](http://www.multitech.net/developer/products/multiconnect-conduit-platform/) | [info](http://www.multitech.net/developer/products/accessory-cards/mtac-lora/) |
@@ -45,12 +45,12 @@ The gateway can be configured by using the serial port.
     2. Enter the Baudrate of `115200`
     3. Select for Flow Control: `XON/XOFF`
 4. Open the Serial monitor
-5. Log into the Gateway:
+5. Log into the A.E.P. Gateway:
     1. The Login should appear. If not hit a random key.
     2. Login with the following credentials:
         1. Username: admin
         2. Password: admin
-    3. If the login was successfull the commandline shoud appear: `admin@mtcdt:~#`.
+    3. If the login was successful the commandline should appear: `admin@mtcdt:~#`.
 
     ```
         _        _____     ____
@@ -70,9 +70,31 @@ The gateway can be configured by using the serial port.
     admin@mtcdt:~#
     ```
 
-#Updating the packetforwarder
+6. Log into the mLinux Gateway:
+    1. The Login should appear. If not hit a random key.
+    2. Login with the following credentials:
+        1. Username: root
+        2. Password: root
+    3. If the login was successful the commandline should appear: `root@mtcdt:~#`.
 
-1. Download [here](http://www.multitech.net/developer/downloads/) the latest `Packet-forwarder` and `Network-Server` packet from the Multitech.
+    ```
+               _     _
+     _ __ ___ | |   (_)_ __  _   ___  __
+    | '_ ` _ \| |   | | '_ \| | | \ \/ /
+    | | | | | | |___| | | | | |_| |>  <
+    |_| |_| |_|_____|_|_| |_|\__,_/_/\_\
+
+    MultiTech Systems mLinux GNU/Linux
+    mLinux 3.1.0 mtcdt /dev/ttyGS0
+
+    mtcdt login: root
+    Password:
+    root@mtcdt:~#
+    ```
+
+#Updating the Lora Packet Forwarder
+
+1. Download [here](http://www.multitech.net/developer/downloads/) the latest `Lora-Packet-forwarder` and `Lora-Network-Server` packet from the Multitech.
 
     The file should be named like this: 
     
@@ -119,30 +141,19 @@ The gateway can be configured by using the serial port.
 
 #Configuring the Packet-Forwarder for The Things Network
 
-1. Make a ne directory: `mkdir /var/lora`
+1. Make a new directory: `mkdir /var/lora`
 2. Copy the example network-server configuration to the `lora` folder: `cp /opt/lora/lora-network-server.conf.sample /var/config/lora/lora-network-server.conf`
 3. Edit `/var/config/lora/1/lora-network-server.conf` (use `vi` or `nano`)
 
     | Field | MTAC-LORA-915 (NA) | MTAC-LORA-868 (EU) |
     | ----- | ------------------ | ------------------ |
     | **lora - frequesncyBand** | `915` | `868` |
-    | **lora - frequesncySubBand** | `integer: 1 to 8` | `Not applicable` |
+    | **lora - frequesncySubBand** | 2 | `Not applicable` |
     | **lora - frequesncyEU** | `Not applicable` | `default: 869500000  range: [863500000 - 867500000] and [869100000 - 869500000]` |
     | **network["public"]** | `true` | `true` |            
 
-4. `lora-network-server.conf` should look like this:
+4. `lora-network-server.conf` should look be configured like this:
 
-    ```
-    "lora": {
-                    "netID": "010203",      /* netID for beacon packets */
-                    "frequencyBand": "868", /* US="915", EU="868" */
-                    "frequencySubBand": 7,  /* Sub-band for US operation, 1-8 */
-                    "rx1DatarateOffset": 0, /* Datarate offset for mote rx window 1 sent in join response (0-3) */
-                    "rx2Datarate": 12,              /* Datarate for mote rx window 2 sent in join response (7-12) *
-
-    "network": {
-                    "public": true,    /* set to false for private LoRa network with mDots + Conduit */
-    ```    
  
 4. Restart the network server: `/etc/init.d/lora-network-server restart`
 5. Copy the `global_conf.json` to the  right directory: `cp /var/run/lora/1/global_conf.json /var/config/lora/1/`
@@ -207,7 +218,7 @@ The gateway can be configured by using the serial port.
  #Check if the packetforwarder is running
  
  1. Check if the gateway is receiving packages: `tail -f /var/log/lora-pkt-fwd-1.log`
- 
+       
     ```
     ##### 2016-05-17 15:09:32 GMT #####
     ### [UPSTREAM] ###
@@ -228,6 +239,20 @@ The gateway can be configured by using the serial port.
     INFO: [up] PUSH_ACK received in 5 ms
     ```
     
+    **For Upstream**
+    1. `RF packets received by concentrator` (packets are stored in concentrator)
+    2. `RF packets forwarded` (packets are forwarded to The Things Network server)
+    3. `PUSH_DATA acknowledged` (forwarding acknowledgement)
+        * 0% : no active connection to TTN backend
+        * 100% : active connection to TTN backend
+        
+    **For Downstream**
+    1. `PULL_DATA sent` (requesting avaliable downstream packets)
+        * 0% : no active connection to TTN backend
+        * 100% : active connection to TTN backend        
+    2. `PULL_RESP(onse) datagrams received` (downstream packets)
+    3. `RF packets sent to concentrator` (concentrator sends downstream packets)
+        
 <aside class = 'success'>
     Congratulations, if you have simmilar logs, the gateway works
 </aside>

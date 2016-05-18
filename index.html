@@ -275,43 +275,30 @@ admin@mtcdt:/media/sda1/multitech#
 <li><p>Edit <code class="prettyprint">/etc/init.d/lora-network-server</code> (use <code class="prettyprint">vi</code> or <code class="prettyprint">nano</code>)</p>
 
 <ol>
-<li>Comment out the LoRa network server start code:</li>
-</ol>
+<li><p>Comment out the LoRa network server start code:</p>
 <pre class="highlight plaintext"><code># start network server                  
 #start-stop-daemon --start --background --make-pidfile \
 #    --pidfile $net_server_pidfile --exec $net_server -- \
 #    -c $conf_file --lora-eui $lora_eui --lora-path $run_dir --db $conf_db \
 #    --noconsole -l $net_server_log                      
 #sleep 1
-</code></pre>
-
-<ol>
-<li>change the -c $run_dir to -c $conf_dir:</li>
-</ol>
+</code></pre></li>
+<li><p>change the -c $run_dir to -c $conf_dir:</p>
 <pre class="highlight plaintext"><code># start packet forwarder
 start-stop-daemon --start --background --make-pidfile \
     --pidfile $pkt_fwd_pidfile --exec $pkt_fwd -- \
     -c $conf_dir -l $pkt_fwd_log
 echo "OK"
-
-</code></pre>
-
-<ol>
-<li>Comment out the LoRa network server stop code</li>
-</ol>
+</code></pre></li>
+<li><p>Comment out the LoRa network server stop code</p>
 <pre class="highlight plaintext"><code>#start-stop-daemon --stop --quiet --oknodo --pidfile $net_server_pidfile --retry 15
 start-stop-daemon --stop --quiet --oknodo --pidfile $pkt_fwd_pidfile --retry 5
-</code></pre>
-
-<ol>
-<li>Comment out the LoRa network server stop code</li>
-</ol>
+</code></pre></li>
+<li><p>Comment out the LoRa network server stop code</p>
 <pre class="highlight plaintext"><code>#start-stop-daemon --stop --quiet --oknodo --pidfile $net_server_pidfile --retry 15
 start-stop-daemon --stop --quiet --oknodo --pidfile $pkt_fwd_pidfile --retry 5
-</code></pre>
-
-<ol>
-<li>Restart the Packet forwarder: <code class="prettyprint">/etc/init.d/lora-network-server restart</code></li>
+</code></pre></li>
+<li><p>Restart the Packet forwarder: <code class="prettyprint">/etc/init.d/lora-network-server restart</code></p></li>
 </ol></li>
 </ol>
 

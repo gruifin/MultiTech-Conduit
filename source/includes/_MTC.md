@@ -56,9 +56,9 @@ The gateway can be configured by using the serial port.
 
         ```
             _        _____     ____
-        / \      | ____|   |  _ \
-        / _ \     |  _|     | |_) |
-        / ___ \  _ | |___  _ |  __/_
+           / \      | ____|   |  _ \
+          / _ \     |  _|     | |_) |
+         / ___ \  _ | |___  _ |  __/_
         /_/   \_\(_)|_____|(_)|_|  (_)
 
         MultiTech Systems Application Execution Platform with mLinux GNU/Linux
@@ -80,8 +80,8 @@ The gateway can be configured by using the serial port.
         3. If the login was successful the commandline should appear: `root@mtcdt:~#`.
 
         ```
-                _     _
-        _ __ ___ | |   (_)_ __  _   ___  __
+                   _     _
+         _ __ ___ | |   (_)_ __  _   ___  __
         | '_ ` _ \| |   | | '_ \| | | \ \/ /
         | | | | | | |___| | | | | |_| |>  <
         |_| |_| |_|_____|_|_| |_|\__,_/_/\_\

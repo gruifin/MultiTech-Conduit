@@ -327,32 +327,27 @@ INFO: [up] PUSH_ACK received in 4 ms
 INFO: [down] PULL_ACK received in 6 ms
 INFO: [up] PUSH_ACK received in 4 ms
 INFO: [up] PUSH_ACK received in 5 ms
-</code></pre>
-
-<p><strong>For Upstream</strong></p>
-
-<ol>
-<li><code class="prettyprint">RF packets received by concentrator</code> (packets are stored in concentrator)</li>
-<li><code class="prettyprint">RF packets forwarded</code> (packets are forwarded to The Things Network server)</li>
-<li><code class="prettyprint">PUSH_DATA acknowledged</code> (forwarding acknowledgement)
-
-<ul>
-<li>0% : no active connection to TTN backend</li>
-<li>100% : active connection to TTN backend</li>
-</ul></li>
+</code></pre></li>
 </ol>
 
-<p><strong>For Downstream</strong>
-1. <code class="prettyprint">PULL_DATA sent</code> (requesting avaliable downstream packets)</p>
+<p>* <strong>For Upstream</strong></p>
 
-<p>* 0% : no active connection to TTN backend
-    * 100% : active connection to TTN backend<br>
-2. <code class="prettyprint">PULL_RESP(onse) datagrams received</code> (downstream packets)
-3. <code class="prettyprint">RF packets sent to concentrator</code> (concentrator sends downstream packets)</p></li>
-</ol>
+<p>1. <code class="prettyprint">RF packets received by concentrator</code> (packets are stored in concentrator)
+        2. <code class="prettyprint">RF packets forwarded</code> (packets are forwarded to The Things Network server)
+        3. <code class="prettyprint">PUSH_DATA acknowledged</code> (forwarding acknowledgement)
+            * 0% : no active connection to TTN backend
+            * 100% : active connection to TTN backend</p>
+
+<p>* <strong>For Downstream</strong></p>
+
+<p>1. <code class="prettyprint">PULL_DATA sent</code> (requesting avaliable downstream packets)
+            * 0% : no active connection to TTN backend
+            * 100% : active connection to TTN backend<br>
+        2. <code class="prettyprint">PULL_RESP(onse) datagrams received</code> (downstream packets)
+        3. <code class="prettyprint">RF packets sent to concentrator</code> (concentrator sends downstream packets)</p>
 
 <p><aside class = 'success'>
-    Congratulations, if you have simmilar logs, the gateway works
+    Congratulations, if you have similar logs, the gateway works
 </aside></p>
 
       </div>

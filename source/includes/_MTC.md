@@ -245,7 +245,7 @@ The gateway can be configured by using the serial port.
     INFO: [up] PUSH_ACK received in 5 ms
     ```
     
-    * **For Upstream**
+2. **For Upstream**
     
         1. `RF packets received by concentrator` (packets are stored in concentrator)
         2. `RF packets forwarded` (packets are forwarded to The Things Network server)
@@ -253,7 +253,7 @@ The gateway can be configured by using the serial port.
             * 0% : no active connection to TTN backend
             * 100% : active connection to TTN backend
         
-    * **For Downstream**
+3. **For Downstream**
     
         1. `PULL_DATA sent` (requesting avaliable downstream packets)
             * 0% : no active connection to TTN backend

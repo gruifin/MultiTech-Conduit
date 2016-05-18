@@ -31,10 +31,10 @@ Remove the port cover and retain the screw.
 
 1. Connect the antenna to the `MTAC-LORA` module.
 2. Connect the Ethernet cable
-3. Connect the Power Suply
+3. Connect the Power supply
 4. The gateway should now boot up
 
-#Loging into the Gateway
+#Logging into the Gateway
 
 The gateway can be configured by using the serial port.
 
@@ -220,8 +220,9 @@ The gateway can be configured by using the serial port.
  <aside class = 'success'>
     Congratulations, you have configured the gateway
 </aside>
- 
- #Check if the packetforwarder is running
+
+
+#Check if the packetforwarder is running
  
  1. Check if the gateway is receiving packages: `tail -f /var/log/lora-pkt-fwd-1.log`
        
@@ -244,6 +245,7 @@ The gateway can be configured by using the serial port.
     INFO: [up] PUSH_ACK received in 4 ms
     INFO: [up] PUSH_ACK received in 5 ms
     ```
+ 
     
 2. **For Upstream**
     

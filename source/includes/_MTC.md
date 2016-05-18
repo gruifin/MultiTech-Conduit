@@ -245,24 +245,22 @@ The gateway can be configured by using the serial port.
     INFO: [up] PUSH_ACK received in 5 ms
     ```
     
-    **For Upstream**
+    * **For Upstream**
     
-    1. `RF packets received by concentrator` (packets are stored in concentrator)
-    2. `RF packets forwarded` (packets are forwarded to The Things Network server)
-    3. `PUSH_DATA acknowledged` (forwarding acknowledgement)
-        * 0% : no active connection to TTN backend
-        * 100% : active connection to TTN backend
+        1. `RF packets received by concentrator` (packets are stored in concentrator)
+        2. `RF packets forwarded` (packets are forwarded to The Things Network server)
+        3. `PUSH_DATA acknowledged` (forwarding acknowledgement)
+            * 0% : no active connection to TTN backend
+            * 100% : active connection to TTN backend
         
-    **For Downstream**
+    * **For Downstream**
     
-    1. `PULL_DATA sent` (requesting avaliable downstream packets)
-    
-        * 0% : no active connection to TTN backend
-        * 100% : active connection to TTN backend  
-              
-    2. `PULL_RESP(onse) datagrams received` (downstream packets)
-    3. `RF packets sent to concentrator` (concentrator sends downstream packets)
+        1. `PULL_DATA sent` (requesting avaliable downstream packets)
+            * 0% : no active connection to TTN backend
+            * 100% : active connection to TTN backend  
+        2. `PULL_RESP(onse) datagrams received` (downstream packets)
+        3. `RF packets sent to concentrator` (concentrator sends downstream packets)
         
 <aside class = 'success'>
-    Congratulations, if you have simmilar logs, the gateway works
+    Congratulations, if you have similar logs, the gateway works
 </aside>

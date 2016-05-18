@@ -60,7 +60,7 @@
 <h2 id='the-hardware'>The Hardware</h2>
 <table><thead>
 <tr>
-<th>Multitech Conduit</th>
+<th>MultiTech Conduit</th>
 <th>MTAC-LORA</th>
 </tr>
 </thead><tbody>
@@ -91,7 +91,7 @@ Remove the port cover and retain the screw.</li>
 <li>Connect the Power Suply</li>
 <li>The gateway should now boot up</li>
 </ol>
-<h1 id='login-into-the-gateway'>Loging into the Gateway</h1>
+<h1 id='loging-into-the-gateway'>Loging into the Gateway</h1>
 <p>The gateway can be configured by using the serial port.</p>
 
 <ol>
@@ -105,7 +105,7 @@ Remove the port cover and retain the screw.</li>
 <li>Select for Flow Control: <code class="prettyprint">XON/XOFF</code></li>
 </ol></li>
 <li>Open the Serial monitor</li>
-<li><p>Log into the Gateway:</p>
+<li><p>Log into the A.E.P. Gateway:</p>
 
 <ol>
 <li>The Login should appear. If not hit a random key.</li>
@@ -115,7 +115,7 @@ Remove the port cover and retain the screw.</li>
 <li>Username: admin</li>
 <li>Password: admin</li>
 </ol></li>
-<li>If the login was successfull the commandline shoud appear: <code class="prettyprint">admin@mtcdt:~#</code>.</li>
+<li>If the login was successful the commandline should appear: <code class="prettyprint">admin@mtcdt:~#</code>.</li>
 </ol>
 <pre class="highlight plaintext"><code>    _        _____     ____
    / \      | ____|   |  _ \
@@ -133,10 +133,35 @@ mtcdt login: admin
 Password:
 admin@mtcdt:~#
 </code></pre></li>
-</ol>
-<h1 id='updating-the-packetforwarder'>Updating the packetforwarder</h1>
+<li><p>Log into the mLinux Gateway:</p>
+
 <ol>
-<li><p>Download <a href="http://www.multitech.net/developer/downloads/">here</a> the latest <code class="prettyprint">Packet-forwarder</code> and <code class="prettyprint">Network-Server</code> packet from the Multitech.</p>
+<li>The Login should appear. If not hit a random key.</li>
+<li>Login with the following credentials:
+
+<ol>
+<li>Username: root</li>
+<li>Password: root</li>
+</ol></li>
+<li>If the login was successful the commandline should appear: <code class="prettyprint">root@mtcdt:~#</code>.</li>
+</ol>
+<pre class="highlight plaintext"><code>           _     _
+ _ __ ___ | |   (_)_ __  _   ___  __
+| '_ ` _ \| |   | | '_ \| | | \ \/ /
+| | | | | | |___| | | | | |_| |&gt;  &lt;
+|_| |_| |_|_____|_|_| |_|\__,_/_/\_\
+
+MultiTech Systems mLinux GNU/Linux
+mLinux 3.1.0 mtcdt /dev/ttyGS0
+
+mtcdt login: root
+Password:
+root@mtcdt:~#
+</code></pre></li>
+</ol>
+<h1 id='updating-the-lora-packet-forwarder'>Updating the Lora Packet Forwarder</h1>
+<ol>
+<li><p>Download <a href="http://www.multitech.net/developer/downloads/">here</a> the latest <code class="prettyprint">Lora-Packet-forwarder</code> and <code class="prettyprint">Lora-Network-Server</code> packet from the Multitech.</p>
 
 <p>The file should be named like this: </p></li>
 </ol>
@@ -189,7 +214,7 @@ admin@mtcdt:/media/sda1/multitech#
 </aside></p>
 <h1 id='configuring-the-packet-forwarder-for-the-things-network'>Configuring the Packet-Forwarder for The Things Network</h1>
 <ol>
-<li>Make a ne directory: <code class="prettyprint">mkdir /var/lora</code></li>
+<li>Make a new directory: <code class="prettyprint">mkdir /var/lora</code></li>
 <li>Copy the example network-server configuration to the <code class="prettyprint">lora</code> folder: <code class="prettyprint">cp /opt/lora/lora-network-server.conf.sample /var/config/lora/lora-network-server.conf</code></li>
 <li><p>Edit <code class="prettyprint">/var/config/lora/1/lora-network-server.conf</code> (use <code class="prettyprint">vi</code> or <code class="prettyprint">nano</code>)</p>
 
@@ -207,7 +232,7 @@ admin@mtcdt:/media/sda1/multitech#
 </tr>
 <tr>
 <td><strong>lora - frequesncySubBand</strong></td>
-<td><code class="prettyprint">integer: 1 to 8</code></td>
+<td>2</td>
 <td><code class="prettyprint">Not applicable</code></td>
 </tr>
 <tr>
@@ -221,17 +246,7 @@ admin@mtcdt:/media/sda1/multitech#
 <td><code class="prettyprint">true</code></td>
 </tr>
 </tbody></table></li>
-<li><p><code class="prettyprint">lora-network-server.conf</code> should look like this:</p>
-<pre class="highlight plaintext"><code>"lora": {
-                "netID": "010203",      /* netID for beacon packets */
-                "frequencyBand": "868", /* US="915", EU="868" */
-                "frequencySubBand": 7,  /* Sub-band for US operation, 1-8 */
-                "rx1DatarateOffset": 0, /* Datarate offset for mote rx window 1 sent in join response (0-3) */
-                "rx2Datarate": 12,              /* Datarate for mote rx window 2 sent in join response (7-12) *
-
-"network": {
-                "public": true,    /* set to false for private LoRa network with mDots + Conduit */
-</code></pre></li>
+<li><p><code class="prettyprint">lora-network-server.conf</code> should look be configured like this:</p></li>
 <li><p>Restart the network server: <code class="prettyprint">/etc/init.d/lora-network-server restart</code></p></li>
 <li><p>Copy the <code class="prettyprint">global_conf.json</code> to the  right directory: <code class="prettyprint">cp /var/run/lora/1/global_conf.json /var/config/lora/1/</code></p></li>
 <li><p>Edit <code class="prettyprint">/etc/config/lora/1/global_config.json</code> (use <code class="prettyprint">vi</code> or <code class="prettyprint">nano</code>)</p></li>
@@ -316,7 +331,27 @@ INFO: [up] PUSH_ACK received in 4 ms
 INFO: [down] PULL_ACK received in 6 ms
 INFO: [up] PUSH_ACK received in 4 ms
 INFO: [up] PUSH_ACK received in 5 ms
-</code></pre></li>
+</code></pre>
+
+<p><strong>For Upstream</strong></p>
+
+<ol>
+<li><code class="prettyprint">RF packets received by concentrator</code> (packets are stored in concentrator)</li>
+<li><code class="prettyprint">RF packets forwarded</code> (packets are forwarded to The Things Network server)</li>
+<li><code class="prettyprint">PUSH_DATA acknowledged</code> (forwarding acknowledgement)
+
+<ul>
+<li>0% : no active connection to TTN backend</li>
+<li>100% : active connection to TTN backend</li>
+</ul></li>
+</ol>
+
+<p><strong>For Downstream</strong>
+1. <code class="prettyprint">PULL_DATA sent</code> (requesting avaliable downstream packets)
+    * 0% : no active connection to TTN backend
+    * 100% : active connection to TTN backend<br>
+2. <code class="prettyprint">PULL_RESP(onse) datagrams received</code> (downstream packets)
+3. <code class="prettyprint">RF packets sent to concentrator</code> (concentrator sends downstream packets)</p></li>
 </ol>
 
 <p><aside class = 'success'>

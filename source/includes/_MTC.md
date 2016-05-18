@@ -45,56 +45,58 @@ The gateway can be configured by using the serial port.
     2. Enter the Baudrate of `115200`
     3. Select for Flow Control: `XON/XOFF`
 4. Open the Serial monitor
-5. Log into the **A.E.P. Gateway**:
-    1. The Login should appear. If not hit a random key.
-    2. Login with the following credentials:
-        1. Username: admin
-        2. Password: admin
-    3. If the login was successful the commandline should appear: `admin@mtcdt:~#`.
+5. 
 
-    ```
-        _        _____     ____
-       / \      | ____|   |  _ \
-      / _ \     |  _|     | |_) |
-     / ___ \  _ | |___  _ |  __/_
-    /_/   \_\(_)|_____|(_)|_|  (_)
+    1. Log into the **A.E.P. Gateway**:
+        1. The Login should appear. If not hit a random key.
+        2. Login with the following credentials:
+            1. Username: admin
+            2. Password: admin
+        3. If the login was successful the commandline should appear: `admin@mtcdt:~#`.
 
-    MultiTech Systems Application Execution Platform with mLinux GNU/Linux
+        ```
+            _        _____     ____
+        / \      | ____|   |  _ \
+        / _ \     |  _|     | |_) |
+        / ___ \  _ | |___  _ |  __/_
+        /_/   \_\(_)|_____|(_)|_|  (_)
 
-    mLinux 3.1.0 mtcdt /dev/ttyGS0
+        MultiTech Systems Application Execution Platform with mLinux GNU/Linux
 
-    Version: 1.1.2
-    Date: 2016-01-13T09:59:04
-    mtcdt login: admin
-    Password:
-    admin@mtcdt:~#
-    ```
+        mLinux 3.1.0 mtcdt /dev/ttyGS0
 
-6. Log into the **mLinux Gateway**:
-    1. The Login should appear. If not hit a random key.
-    2. Login with the following credentials:
-        1. Username: root
-        2. Password: root
-    3. If the login was successful the commandline should appear: `root@mtcdt:~#`.
+        Version: 1.1.2
+        Date: 2016-01-13T09:59:04
+        mtcdt login: admin
+        Password:
+        admin@mtcdt:~#
+        ```
 
-    ```
-               _     _
-     _ __ ___ | |   (_)_ __  _   ___  __
-    | '_ ` _ \| |   | | '_ \| | | \ \/ /
-    | | | | | | |___| | | | | |_| |>  <
-    |_| |_| |_|_____|_|_| |_|\__,_/_/\_\
+    2. Log into the **mLinux Gateway**:
+        1. The Login should appear. If not hit a random key.
+        2. Login with the following credentials:
+            1. Username: root
+            2. Password: root
+        3. If the login was successful the commandline should appear: `root@mtcdt:~#`.
 
-    MultiTech Systems mLinux GNU/Linux
-    mLinux 3.1.0 mtcdt /dev/ttyGS0
+        ```
+                _     _
+        _ __ ___ | |   (_)_ __  _   ___  __
+        | '_ ` _ \| |   | | '_ \| | | \ \/ /
+        | | | | | | |___| | | | | |_| |>  <
+        |_| |_| |_|_____|_|_| |_|\__,_/_/\_\
 
-    mtcdt login: root
-    Password:
-    root@mtcdt:~#
-    ```
+        MultiTech Systems mLinux GNU/Linux
+        mLinux 3.1.0 mtcdt /dev/ttyGS0
+
+        mtcdt login: root
+        Password:
+        root@mtcdt:~#
+        ```
 
 #Updating the Lora Packet Forwarder
 
-1. Download [here](http://www.multitech.net/developer/downloads/) the latest `Lora-Packet-forwarder` and `Lora-Network-Server` packet from the Multitech. The file should be named like this:
+1. Download [here](http://www.multitech.net/developer/downloads/) the latest `Lora-Packet-forwarder` and `Lora-Network-Server` packet from the Multitech. The file should be similar to this:
     * `lora-packet-forwarder_1.4.1-r9.1_arm926ejste.ipk`
     * `lora-network-server_1.0.8-r0.0_mlinux.ipk`
 
@@ -138,9 +140,9 @@ The gateway can be configured by using the serial port.
 
 #Configuring the Packet-Forwarder for The Things Network
 
-1. Make a new directory: `mkdir /var/lora`
+1. Make a new directory: `mkdir /var/config/lora`
 2. Copy the example network-server configuration to the `lora` folder: `cp /opt/lora/lora-network-server.conf.sample /var/config/lora/lora-network-server.conf`
-3. Edit `/var/config/lora/1/lora-network-server.conf` (use `vi` or `nano`)
+3. Edit `/var/config/lora/lora-network-server.conf` (use `vi` or `nano`)
 
     | Field | MTAC-LORA-915 (NA) | MTAC-LORA-868 (EU) |
     | ----- | ------------------ | ------------------ |
@@ -149,12 +151,9 @@ The gateway can be configured by using the serial port.
     | **lora - frequesncyEU** | `Not applicable` | `default: 869500000  range: [863500000 - 867500000] and [869100000 - 869500000]` |
     | **network["public"]** | `true` | `true` |            
 
-4. `lora-network-server.conf` should look be configured like this:
-
- 
 4. Restart the network server: `/etc/init.d/lora-network-server restart`
-5. Copy the `global_conf.json` to the  right directory: `cp /var/run/lora/1/global_conf.json /var/config/lora/1/`
-6. Edit `/etc/config/lora/1/global_config.json` (use `vi` or `nano`)
+5. Copy the `global_conf.json` to the  right directory: `cp /var/run/lora/1/global_conf.json /var/config/lora/`
+6. Edit `/etc/config/lora/global_config.json` (use `vi` or `nano`)
 7. Enter the server address depending on your region:
     * `router.eu.staging.thethings.network` # EU 433 and EU 863-870
     * `router.us.staging.thethings.network` # US 902-928
@@ -181,7 +180,7 @@ The gateway can be configured by using the serial port.
     ```
 
 6. Edit `/etc/init.d/lora-network-server` (use `vi` or `nano`)
-    1. Comment out the Lora network server start code:
+    1. Comment out the LoRa network server start code:
     
     ```
     # start network server                  
@@ -192,14 +191,25 @@ The gateway can be configured by using the serial port.
     #sleep 1
     ```
     
-    2. On line 65, change the -c $run_dir to -c $conf_dir:
+    2. change the -c $run_dir to -c $conf_dir:
+    
+    ```
+    # start packet forwarder
+    start-stop-daemon --start --background --make-pidfile \
+        --pidfile $pkt_fwd_pidfile --exec $pkt_fwd -- \
+        -c $conf_dir -l $pkt_fwd_log
+    echo "OK"
+
+    ``` 
+    
+    3. Comment out the LoRa network server stop code
     
     ```
     #start-stop-daemon --stop --quiet --oknodo --pidfile $net_server_pidfile --retry 15
     start-stop-daemon --stop --quiet --oknodo --pidfile $pkt_fwd_pidfile --retry 5
     ```
     
-    3. Comment out the Lora network server stop code
+    4. Comment out the LoRa network server stop code
     
     ```
     #start-stop-daemon --stop --quiet --oknodo --pidfile $net_server_pidfile --retry 15
@@ -247,8 +257,10 @@ The gateway can be configured by using the serial port.
     **For Downstream**
     
     1. `PULL_DATA sent` (requesting avaliable downstream packets)
+    
         * 0% : no active connection to TTN backend
-        * 100% : active connection to TTN backend        
+        * 100% : active connection to TTN backend  
+              
     2. `PULL_RESP(onse) datagrams received` (downstream packets)
     3. `RF packets sent to concentrator` (concentrator sends downstream packets)
         

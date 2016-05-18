@@ -105,6 +105,7 @@ Remove the port cover and retain the screw.</li>
 <li>Select for Flow Control: <code class="prettyprint">XON/XOFF</code></li>
 </ol></li>
 <li>Open the Serial monitor</li>
+<li><ol>
 <li><p>Log into the <strong>A.E.P. Gateway</strong>:</p>
 
 <ol>
@@ -118,9 +119,9 @@ Remove the port cover and retain the screw.</li>
 <li>If the login was successful the commandline should appear: <code class="prettyprint">admin@mtcdt:~#</code>.</li>
 </ol>
 <pre class="highlight plaintext"><code>    _        _____     ____
-   / \      | ____|   |  _ \
-  / _ \     |  _|     | |_) |
- / ___ \  _ | |___  _ |  __/_
+/ \      | ____|   |  _ \
+/ _ \     |  _|     | |_) |
+/ ___ \  _ | |___  _ |  __/_
 /_/   \_\(_)|_____|(_)|_|  (_)
 
 MultiTech Systems Application Execution Platform with mLinux GNU/Linux
@@ -145,8 +146,8 @@ admin@mtcdt:~#
 </ol></li>
 <li>If the login was successful the commandline should appear: <code class="prettyprint">root@mtcdt:~#</code>.</li>
 </ol>
-<pre class="highlight plaintext"><code>           _     _
- _ __ ___ | |   (_)_ __  _   ___  __
+<pre class="highlight plaintext"><code>        _     _
+_ __ ___ | |   (_)_ __  _   ___  __
 | '_ ` _ \| |   | | '_ \| | | \ \/ /
 | | | | | | |___| | | | | |_| |&gt;  &lt;
 |_| |_| |_|_____|_|_| |_|\__,_/_/\_\
@@ -158,6 +159,7 @@ mtcdt login: root
 Password:
 root@mtcdt:~#
 </code></pre></li>
+</ol></li>
 </ol>
 <h1 id='updating-the-lora-packet-forwarder'>Updating the Lora Packet Forwarder</h1>
 <ol>
@@ -211,9 +213,9 @@ admin@mtcdt:/media/sda1/multitech#
 </aside></p>
 <h1 id='configuring-the-packet-forwarder-for-the-things-network'>Configuring the Packet-Forwarder for The Things Network</h1>
 <ol>
-<li>Make a new directory: <code class="prettyprint">mkdir /var/lora</code></li>
+<li>Make a new directory: <code class="prettyprint">mkdir /var/config/lora</code></li>
 <li>Copy the example network-server configuration to the <code class="prettyprint">lora</code> folder: <code class="prettyprint">cp /opt/lora/lora-network-server.conf.sample /var/config/lora/lora-network-server.conf</code></li>
-<li><p>Edit <code class="prettyprint">/var/config/lora/1/lora-network-server.conf</code> (use <code class="prettyprint">vi</code> or <code class="prettyprint">nano</code>)</p>
+<li><p>Edit <code class="prettyprint">/var/config/lora/lora-network-server.conf</code> (use <code class="prettyprint">vi</code> or <code class="prettyprint">nano</code>)</p>
 
 <table><thead>
 <tr>
@@ -243,10 +245,9 @@ admin@mtcdt:/media/sda1/multitech#
 <td><code class="prettyprint">true</code></td>
 </tr>
 </tbody></table></li>
-<li><p><code class="prettyprint">lora-network-server.conf</code> should look be configured like this:</p></li>
 <li><p>Restart the network server: <code class="prettyprint">/etc/init.d/lora-network-server restart</code></p></li>
-<li><p>Copy the <code class="prettyprint">global_conf.json</code> to the  right directory: <code class="prettyprint">cp /var/run/lora/1/global_conf.json /var/config/lora/1/</code></p></li>
-<li><p>Edit <code class="prettyprint">/etc/config/lora/1/global_config.json</code> (use <code class="prettyprint">vi</code> or <code class="prettyprint">nano</code>)</p></li>
+<li><p>Copy the <code class="prettyprint">global_conf.json</code> to the  right directory: <code class="prettyprint">cp /var/run/lora/1/global_conf.json /var/config/lora/</code></p></li>
+<li><p>Edit <code class="prettyprint">/etc/config/lora/global_config.json</code> (use <code class="prettyprint">vi</code> or <code class="prettyprint">nano</code>)</p></li>
 <li><p>Enter the server address depending on your region:</p>
 
 <ul>
@@ -274,7 +275,7 @@ admin@mtcdt:/media/sda1/multitech#
 <li><p>Edit <code class="prettyprint">/etc/init.d/lora-network-server</code> (use <code class="prettyprint">vi</code> or <code class="prettyprint">nano</code>)</p>
 
 <ol>
-<li>Comment out the Lora network server start code:</li>
+<li>Comment out the LoRa network server start code:</li>
 </ol>
 <pre class="highlight plaintext"><code># start network server                  
 #start-stop-daemon --start --background --make-pidfile \
@@ -285,14 +286,25 @@ admin@mtcdt:/media/sda1/multitech#
 </code></pre>
 
 <ol>
-<li>On line 65, change the -c $run_dir to -c $conf_dir:</li>
+<li>change the -c $run_dir to -c $conf_dir:</li>
+</ol>
+<pre class="highlight plaintext"><code># start packet forwarder
+start-stop-daemon --start --background --make-pidfile \
+    --pidfile $pkt_fwd_pidfile --exec $pkt_fwd -- \
+    -c $conf_dir -l $pkt_fwd_log
+echo "OK"
+
+</code></pre>
+
+<ol>
+<li>Comment out the LoRa network server stop code</li>
 </ol>
 <pre class="highlight plaintext"><code>#start-stop-daemon --stop --quiet --oknodo --pidfile $net_server_pidfile --retry 15
 start-stop-daemon --stop --quiet --oknodo --pidfile $pkt_fwd_pidfile --retry 5
 </code></pre>
 
 <ol>
-<li>Comment out the Lora network server stop code</li>
+<li>Comment out the LoRa network server stop code</li>
 </ol>
 <pre class="highlight plaintext"><code>#start-stop-daemon --stop --quiet --oknodo --pidfile $net_server_pidfile --retry 15
 start-stop-daemon --stop --quiet --oknodo --pidfile $pkt_fwd_pidfile --retry 5
@@ -344,8 +356,9 @@ INFO: [up] PUSH_ACK received in 5 ms
 </ol>
 
 <p><strong>For Downstream</strong>
-1. <code class="prettyprint">PULL_DATA sent</code> (requesting avaliable downstream packets)
-    * 0% : no active connection to TTN backend
+1. <code class="prettyprint">PULL_DATA sent</code> (requesting avaliable downstream packets)</p>
+
+<p>* 0% : no active connection to TTN backend
     * 100% : active connection to TTN backend<br>
 2. <code class="prettyprint">PULL_RESP(onse) datagrams received</code> (downstream packets)
 3. <code class="prettyprint">RF packets sent to concentrator</code> (concentrator sends downstream packets)</p></li>

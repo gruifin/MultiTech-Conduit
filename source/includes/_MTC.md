@@ -94,11 +94,8 @@ The gateway can be configured by using the serial port.
 
 #Updating the Lora Packet Forwarder
 
-1. Download [here](http://www.multitech.net/developer/downloads/) the latest `Lora-Packet-forwarder` and `Lora-Network-Server` packet from the Multitech.
-
-    The file should be named like this: 
-    
-    * `lora-packet-forwarder_1.4.1-r9.1_arm926ejste.ipk`.
+1. Download [here](http://www.multitech.net/developer/downloads/) the latest `Lora-Packet-forwarder` and `Lora-Network-Server` packet from the Multitech. The file should be named like this:
+    * `lora-packet-forwarder_1.4.1-r9.1_arm926ejste.ipk`
     * `lora-network-server_1.0.8-r0.0_mlinux.ipk`
 
 2. Copy the file to a flashdrive.

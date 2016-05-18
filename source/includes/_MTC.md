@@ -182,39 +182,38 @@ The gateway can be configured by using the serial port.
 6. Edit `/etc/init.d/lora-network-server` (use `vi` or `nano`)
     1. Comment out the LoRa network server start code:
     
-    ```
-    # start network server                  
-    #start-stop-daemon --start --background --make-pidfile \
-    #    --pidfile $net_server_pidfile --exec $net_server -- \
-    #    -c $conf_file --lora-eui $lora_eui --lora-path $run_dir --db $conf_db \
-    #    --noconsole -l $net_server_log                      
-    #sleep 1
-    ```
+        ```
+        # start network server                  
+        #start-stop-daemon --start --background --make-pidfile \
+        #    --pidfile $net_server_pidfile --exec $net_server -- \
+        #    -c $conf_file --lora-eui $lora_eui --lora-path $run_dir --db $conf_db \
+        #    --noconsole -l $net_server_log                      
+        #sleep 1
+        ```
     
     2. change the -c $run_dir to -c $conf_dir:
     
-    ```
-    # start packet forwarder
-    start-stop-daemon --start --background --make-pidfile \
-        --pidfile $pkt_fwd_pidfile --exec $pkt_fwd -- \
-        -c $conf_dir -l $pkt_fwd_log
-    echo "OK"
-
-    ``` 
+        ```
+        # start packet forwarder
+        start-stop-daemon --start --background --make-pidfile \
+            --pidfile $pkt_fwd_pidfile --exec $pkt_fwd -- \
+            -c $conf_dir -l $pkt_fwd_log
+        echo "OK"
+        ``` 
     
     3. Comment out the LoRa network server stop code
     
-    ```
-    #start-stop-daemon --stop --quiet --oknodo --pidfile $net_server_pidfile --retry 15
-    start-stop-daemon --stop --quiet --oknodo --pidfile $pkt_fwd_pidfile --retry 5
-    ```
+        ```
+        #start-stop-daemon --stop --quiet --oknodo --pidfile $net_server_pidfile --retry 15
+        start-stop-daemon --stop --quiet --oknodo --pidfile $pkt_fwd_pidfile --retry 5
+        ```
     
     4. Comment out the LoRa network server stop code
     
-    ```
-    #start-stop-daemon --stop --quiet --oknodo --pidfile $net_server_pidfile --retry 15
-    start-stop-daemon --stop --quiet --oknodo --pidfile $pkt_fwd_pidfile --retry 5
-    ```
+        ```
+        #start-stop-daemon --stop --quiet --oknodo --pidfile $net_server_pidfile --retry 15
+        start-stop-daemon --stop --quiet --oknodo --pidfile $pkt_fwd_pidfile --retry 5
+        ```
     
  7. Restart the Packet forwarder: `/etc/init.d/lora-network-server restart`
  

@@ -45,7 +45,7 @@ The gateway can be configured by using the serial port.
     2. Enter the Baudrate of `115200`
     3. Select for Flow Control: `XON/XOFF`
 4. Open the Serial monitor
-5. Log into the A.E.P. Gateway:
+5. Log into the **A.E.P. Gateway**:
     1. The Login should appear. If not hit a random key.
     2. Login with the following credentials:
         1. Username: admin
@@ -70,7 +70,7 @@ The gateway can be configured by using the serial port.
     admin@mtcdt:~#
     ```
 
-6. Log into the mLinux Gateway:
+6. Log into the **mLinux Gateway**:
     1. The Login should appear. If not hit a random key.
     2. Login with the following credentials:
         1. Username: root
@@ -240,6 +240,7 @@ The gateway can be configured by using the serial port.
     ```
     
     **For Upstream**
+    
     1. `RF packets received by concentrator` (packets are stored in concentrator)
     2. `RF packets forwarded` (packets are forwarded to The Things Network server)
     3. `PUSH_DATA acknowledged` (forwarding acknowledgement)
@@ -247,6 +248,7 @@ The gateway can be configured by using the serial port.
         * 100% : active connection to TTN backend
         
     **For Downstream**
+    
     1. `PULL_DATA sent` (requesting avaliable downstream packets)
         * 0% : no active connection to TTN backend
         * 100% : active connection to TTN backend        

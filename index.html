@@ -88,10 +88,10 @@ Remove the port cover and retain the screw.</li>
 <ol>
 <li>Connect the antenna to the <code class="prettyprint">MTAC-LORA</code> module.</li>
 <li>Connect the Ethernet cable</li>
-<li>Connect the Power Suply</li>
+<li>Connect the Power supply</li>
 <li>The gateway should now boot up</li>
 </ol>
-<h1 id='loging-into-the-gateway'>Loging into the Gateway</h1>
+<h1 id='logging-into-the-gateway'>Logging into the Gateway</h1>
 <p>The gateway can be configured by using the serial port.</p>
 
 <ol>
@@ -305,9 +305,7 @@ start-stop-daemon --stop --quiet --oknodo --pidfile $pkt_fwd_pidfile --retry 5
 <p><aside class = 'success'>
     Congratulations, you have configured the gateway
 </aside></p>
-
-<p>#Check if the packetforwarder is running</p>
-
+<h1 id='check-if-the-packetforwarder-is-running'>Check if the packetforwarder is running</h1>
 <ol>
 <li><p>Check if the gateway is receiving packages: <code class="prettyprint">tail -f /var/log/lora-pkt-fwd-1.log</code></p>
 <pre class="highlight plaintext"><code>##### 2016-05-17 15:09:32 GMT #####
